@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    restart: unless-stopped
+    container_name: 'my-rabbitmq'
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    hostname: supereasy        
+    volumes:
+      - my-rabbitmq:/var/lib/rabbitmq 
+    ports:
+        - "15672:15672"
+        - "5672:5672"
+volumes:
+  my-rabbitmq:
+    name: my-rabbitmq
+    driver: local
